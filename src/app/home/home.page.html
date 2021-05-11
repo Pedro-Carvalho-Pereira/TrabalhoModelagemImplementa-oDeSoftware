@@ -1,3 +1,6 @@
+
+
+
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title> Climabr </ion-title>
@@ -24,7 +27,7 @@
             id="{{city.id}}"
             name="{{city.name}}"
             state="{{city.state}}"
-            (selectCity)="onSelectCity($event)"
+            (selectCity)="onSelectCity($event,city.name)"
           ></app-city-details>
         </ion-list>
       </ion-col>
@@ -32,11 +35,26 @@
   </ion-grid>
 </ion-content>
 
-<ion-text>
-  <ion-col size-sm="10" offset-sm="1" size-md="8" offset-md="2" class="ion-text-center">
-  <h2>Histórico</h2>
-</ion-col>
-</ion-text>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)='onClickClean()'>
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
+<ion-button (click)='onClick()'>
+  <ion-title>Histórico</ion-title>
+</ion-button>
+
+
+<ion-list>
+  <ion-item *ngFor="let cityname of citynames">
+    <ion-label>{{cityname.key}}</ion-label>
+  </ion-item>
+</ion-list>
+
+
 
 
 
