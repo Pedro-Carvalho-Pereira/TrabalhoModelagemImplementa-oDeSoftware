@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { SearchCityService } from 'src/domain/services/search-city.service';
 import { LoadWeatherService } from 'src/domain/services/load-weather.service';
 import { LocalCityRepository } from 'src/data/local-city-repository';
 import { ApiWeatherRepository } from 'src/data/api-weather-repository';
+import { HistoricServiceService } from 'src/domain/services/historic-service.service';
 
 const createSearchCityService = () => {
   return new SearchCityService(new LocalCityRepository());
@@ -23,12 +25,14 @@ const createLoadWeatherService = (http: HttpClient) => {
   );
 };
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
   ],
@@ -37,6 +41,9 @@ const createLoadWeatherService = (http: HttpClient) => {
     {
       provide: SearchCityService,
       useFactory: createSearchCityService,
+    },
+    {
+      provide: HistoricServiceService,
     },
     {
       provide: LoadWeatherService,
